@@ -11,7 +11,20 @@ public class Movie {
     @Id
     private Long id;
     private String title;
-    private String genres;
+    private String genre;
+    private String director;
+    private String actors;
+    private String Year;
+    // Runtime is in minutes
+    private Long runtime;
+    private Double rating;
+    private Long votes;
+    // Revenue is in Millions
+    private Double revenue;
+    private Long metascore;
+
+    public Movie() {
+    }
 
     public Long getId() {
         return id;
@@ -29,20 +42,75 @@ public class Movie {
         this.title = title;
     }
 
-    public String getGenres() {
-        return genres;
+    public String getGenre() {
+        return genre;
     }
 
-    public void setGenres(String genres) {
-        this.genres = genres;
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
-    @Override
-    public String toString() {
-        return "Movie{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", genres='" + genres + '\'' +
-                '}';
+    public String getDirector() {
+        return director;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public String getActors() {
+        return actors;
+    }
+
+    public void setActors(String actors) {
+        this.actors = actors;
+    }
+
+    public String getYear() {
+        return Year;
+    }
+
+    public void setYear(String year) {
+        Year = year;
+    }
+
+    public Long getRuntime() {
+        return runtime;
+    }
+
+    public void setRuntime(Long runtime) {
+        this.runtime = runtime;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
+
+    public Long getVotes() {
+        return votes;
+    }
+
+    public void setVotes(Long votes) {
+        this.votes = votes;
+    }
+
+    public Double getRevenue() {
+        return revenue;
+    }
+
+    public void setRevenue(Double revenue) {
+        this.revenue = revenue;
+    }
+
+    public Long getMetascore() {
+        return metascore;
+    }
+
+    public void setMetascore(Long metascore) {
+        this.metascore = metascore;
     }
 }

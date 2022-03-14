@@ -23,7 +23,9 @@ import javax.persistence.EntityManagerFactory;
 @EnableBatchProcessing
 public class MoviesDataLoadBatchConfiguration {
 
-    private static final String[] COLUMN_NAMES = new String[]{"movieId", "title", "genres"};
+    private static final String[] COLUMN_NAMES = new String[]{"Id", "Title",
+            "Genre", "Director", "Actors", "Year",
+            "Runtime", "Rating", "Votes", "Revenue", "Metascore"};
 
     @Bean
     public Job moviesDataLoadBatchJob(
