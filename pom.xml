@@ -23,7 +23,7 @@
 
 	<modules>
 		<module>movieskart-metadata-service</module>
-		<module>movieskart-rating-service</module>
+		<module>movieskart-inventory-service</module>
 		<module>movieskart-order-service</module>
 		<module>movieskart-service-orchestrator</module>
 		<module>movieskart-service-config</module>

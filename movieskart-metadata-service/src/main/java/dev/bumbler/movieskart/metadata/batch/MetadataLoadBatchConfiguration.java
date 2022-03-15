@@ -21,7 +21,7 @@ import javax.persistence.EntityManagerFactory;
 
 @Configuration
 @EnableBatchProcessing
-public class MoviesDataLoadBatchConfiguration {
+public class MetadataLoadBatchConfiguration {
 
     private static final String[] COLUMN_NAMES = new String[]{"Id", "Title",
             "Genre", "Director", "Actors", "Year",
@@ -36,7 +36,7 @@ public class MoviesDataLoadBatchConfiguration {
             // mapped class into which read data will be initialized.
             ItemProcessor<Movie, Movie> itemProcessor,
             ItemWriter<Movie> itemWriter,
-            MoviesDataLoadBatchNotificationListener moviesDataLoadBatchNotificationListener) {
+            MetadataLoadBatchNotificationListener moviesDataLoadBatchNotificationListener) {
         // creating spring batch job step below.
         final Step movieDataLoadStep = stepBuilderFactory.get("movie-data-load-step")
                 .<Movie, Movie>chunk(10)

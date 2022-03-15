@@ -5,7 +5,7 @@ import org.springframework.batch.item.ItemProcessor;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MoviesDataLoadBatchProcessor implements ItemProcessor<Movie, Movie> {
+public class MetadataLoadBatchProcessor implements ItemProcessor<Movie, Movie> {
 
     @Override
     public Movie process(Movie movie) throws Exception {

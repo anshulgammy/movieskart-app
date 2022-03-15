@@ -1,12 +1,12 @@
-package dev.bumbler.movieskart.metadata;
+package dev.bumbler.movieskart.inventory;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MoviesKartMetadataServiceApplication {
+public class MoviesKartInventoryServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MoviesKartMetadataServiceApplication.class, args);
+        SpringApplication.run(MoviesKartInventoryServiceApplication.class, args);
     }
 }

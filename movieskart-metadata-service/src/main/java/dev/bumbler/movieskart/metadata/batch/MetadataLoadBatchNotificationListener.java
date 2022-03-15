@@ -13,16 +13,16 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class MoviesDataLoadBatchNotificationListener extends JobExecutionListenerSupport {
+public class MetadataLoadBatchNotificationListener extends JobExecutionListenerSupport {
 
     private MetadataRepository metadataRepository;
 
     @Autowired
-    public MoviesDataLoadBatchNotificationListener(MetadataRepository metadataRepository) {
+    public MetadataLoadBatchNotificationListener(MetadataRepository metadataRepository) {
         this.metadataRepository = metadataRepository;
     }
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MoviesDataLoadBatchNotificationListener.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MetadataLoadBatchNotificationListener.class);
 
     @Override
     public void afterJob(JobExecution jobExecution) {
