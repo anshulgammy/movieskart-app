@@ -1,6 +1,6 @@
 package dev.bumbler.movieskart.inventory.batch;
 
-import dev.bumbler.movieskart.inventory.model.MoviesInventory;
+import dev.bumbler.movieskart.model.inventory.MoviesInventory;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.stereotype.Component;
 

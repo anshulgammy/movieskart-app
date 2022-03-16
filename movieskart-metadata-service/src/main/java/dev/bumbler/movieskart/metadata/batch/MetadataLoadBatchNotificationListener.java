@@ -1,7 +1,7 @@
 package dev.bumbler.movieskart.metadata.batch;
 
-import dev.bumbler.movieskart.metadata.model.Movie;
 import dev.bumbler.movieskart.metadata.repo.MetadataRepository;
+import dev.bumbler.movieskart.model.metadata.Movie;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.BatchStatus;

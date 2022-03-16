@@ -1,7 +1,7 @@
 package dev.bumbler.movieskart.inventory.batch;
 
-import dev.bumbler.movieskart.inventory.model.MoviesInventory;
 import dev.bumbler.movieskart.inventory.repo.InventoryRepository;
+import dev.bumbler.movieskart.model.inventory.MoviesInventory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.BatchStatus;

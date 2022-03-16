@@ -1,4 +1,4 @@
-package dev.bumbler.movieskart.metadata.model;
+package dev.bumbler.movieskart.model.metadata;
 
 import javax.persistence.*;
 

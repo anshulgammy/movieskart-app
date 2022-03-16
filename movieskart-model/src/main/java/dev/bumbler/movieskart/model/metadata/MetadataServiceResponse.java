@@ -1,27 +1,29 @@
-package dev.bumbler.movieskart.inventory.model;
+package dev.bumbler.movieskart.model.metadata;
 
 import org.springframework.http.HttpStatus;
 
-public class InventoryServiceResponse {
-    private MoviesInventory inventory;
+import java.util.List;
+
+public class MetadataServiceResponse {
+    private List<Movie> movies;
     private HttpStatus httpStatus;
     private String message;
 
-    public InventoryServiceResponse() {
+    public MetadataServiceResponse() {
     }
 
-    public InventoryServiceResponse(MoviesInventory inventory, HttpStatus httpStatus, String message) {
-        this.inventory = inventory;
+    public MetadataServiceResponse(List<Movie> movies, HttpStatus httpStatus, String message) {
+        this.movies = movies;
         this.httpStatus = httpStatus;
         this.message = message;
     }
 
-    public MoviesInventory getInventory() {
-        return inventory;
+    public List<Movie> getMovies() {
+        return movies;
     }
 
-    public void setInventory(MoviesInventory inventory) {
-        this.inventory = inventory;
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
     }
 
     public HttpStatus getHttpStatus() {

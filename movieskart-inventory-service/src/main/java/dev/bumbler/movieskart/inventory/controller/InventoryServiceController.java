@@ -1,9 +1,9 @@
 package dev.bumbler.movieskart.inventory.controller;
 
 import dev.bumbler.movieskart.inventory.exceptions.InventoryServiceException;
-import dev.bumbler.movieskart.inventory.model.InventoryServiceResponse;
-import dev.bumbler.movieskart.inventory.model.MoviesInventory;
 import dev.bumbler.movieskart.inventory.service.InventoryService;
+import dev.bumbler.movieskart.model.inventory.InventoryServiceResponse;
+import dev.bumbler.movieskart.model.inventory.MoviesInventory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

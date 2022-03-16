@@ -2,10 +2,10 @@ package dev.bumbler.movieskart.inventory.service;
 
 import com.google.common.base.Preconditions;
 import dev.bumbler.movieskart.inventory.exceptions.InventoryServiceException;
-import dev.bumbler.movieskart.inventory.model.InventoryServiceResponse;
-import dev.bumbler.movieskart.inventory.model.MoviesInventory;
 import dev.bumbler.movieskart.inventory.repo.InventoryRepository;
-import dev.bumbler.movieskart.metadata.util.Constants;
+import dev.bumbler.movieskart.inventory.util.Constants;
+import dev.bumbler.movieskart.model.inventory.InventoryServiceResponse;
+import dev.bumbler.movieskart.model.inventory.MoviesInventory;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,7 +35,7 @@ public class InventoryService {
 
     private InventoryServiceResponse prepareInventoryServiceResponse(MoviesInventory inventory) {
         return new InventoryServiceResponse(inventory, HttpStatus.OK,
-                Constants.METADATA_SERVICE_SUCCESS_RESPONSE_MESSAGE);
+                Constants.INVENTORY_SERVICE_SUCCESS_RESPONSE_MESSAGE);
     }
 
     public InventoryServiceResponse postInventory(MoviesInventory inventory) throws InventoryServiceException {

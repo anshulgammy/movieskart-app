@@ -1,4 +1,4 @@
-package dev.bumbler.movieskart.inventory.model;
+package dev.bumbler.movieskart.model.inventory;
 
 import javax.persistence.*;
 

@@ -1,6 +1,6 @@
 package dev.bumbler.movieskart.metadata.batch;
 
-import dev.bumbler.movieskart.metadata.model.Movie;
+import dev.bumbler.movieskart.model.metadata.Movie;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;

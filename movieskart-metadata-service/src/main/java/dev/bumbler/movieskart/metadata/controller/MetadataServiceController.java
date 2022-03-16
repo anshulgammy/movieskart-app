@@ -1,9 +1,9 @@
 package dev.bumbler.movieskart.metadata.controller;
 
 import dev.bumbler.movieskart.metadata.exceptions.MetadataServiceException;
-import dev.bumbler.movieskart.metadata.model.MetadataServiceResponse;
-import dev.bumbler.movieskart.metadata.model.Movie;
 import dev.bumbler.movieskart.metadata.service.MetadataService;
+import dev.bumbler.movieskart.model.metadata.MetadataServiceResponse;
+import dev.bumbler.movieskart.model.metadata.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

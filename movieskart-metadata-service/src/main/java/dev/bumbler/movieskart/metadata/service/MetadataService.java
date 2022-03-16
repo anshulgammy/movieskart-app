@@ -2,10 +2,10 @@ package dev.bumbler.movieskart.metadata.service;
 
 import com.google.common.base.Preconditions;
 import dev.bumbler.movieskart.metadata.exceptions.MetadataServiceException;
-import dev.bumbler.movieskart.metadata.model.MetadataServiceResponse;
-import dev.bumbler.movieskart.metadata.model.Movie;
 import dev.bumbler.movieskart.metadata.repo.MetadataRepository;
 import dev.bumbler.movieskart.metadata.util.Constants;
+import dev.bumbler.movieskart.model.metadata.MetadataServiceResponse;
+import dev.bumbler.movieskart.model.metadata.Movie;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

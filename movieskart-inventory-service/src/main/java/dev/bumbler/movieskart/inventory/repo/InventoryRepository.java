@@ -1,6 +1,6 @@
 package dev.bumbler.movieskart.inventory.repo;
 
-import dev.bumbler.movieskart.inventory.model.MoviesInventory;
+import dev.bumbler.movieskart.model.inventory.MoviesInventory;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
 package dev.bumbler.movieskart.metadata.repo;
 
-import dev.bumbler.movieskart.metadata.model.Movie;
+import dev.bumbler.movieskart.model.metadata.Movie;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

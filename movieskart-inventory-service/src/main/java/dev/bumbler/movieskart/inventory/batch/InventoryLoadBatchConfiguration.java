@@ -1,6 +1,6 @@
 package dev.bumbler.movieskart.inventory.batch;
 
-import dev.bumbler.movieskart.inventory.model.MoviesInventory;
+import dev.bumbler.movieskart.model.inventory.MoviesInventory;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
