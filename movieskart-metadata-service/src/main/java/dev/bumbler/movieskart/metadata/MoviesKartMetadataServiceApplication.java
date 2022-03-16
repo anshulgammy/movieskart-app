@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
-@EntityScan(basePackages={"dev.bumbler.movieskart.model.metadata"})
+@EntityScan(basePackages = {"dev.bumbler.movieskart.model.metadata"})
 public class MoviesKartMetadataServiceApplication {
 
   public static void main(String[] args) {
