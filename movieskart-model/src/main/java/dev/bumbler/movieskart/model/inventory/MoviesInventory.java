@@ -6,54 +6,54 @@ import javax.persistence.*;
 @Table(name = "TBL_MOVIES_INVENTORY")
 public class MoviesInventory {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private Long movieId;
-    private Long quantityAvailable;
-    private Boolean sellable;
-    private Double currentPrice;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
 
-    public MoviesInventory() {
-    }
+  private Long movieId;
+  private Long quantityAvailable;
+  private Boolean sellable;
+  private Double currentPrice;
 
-    public Long getId() {
-        return id;
-    }
+  public MoviesInventory() {}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public Long getMovieId() {
-        return movieId;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public void setMovieId(Long movieId) {
-        this.movieId = movieId;
-    }
+  public Long getMovieId() {
+    return movieId;
+  }
 
-    public Long getQuantityAvailable() {
-        return quantityAvailable;
-    }
+  public void setMovieId(Long movieId) {
+    this.movieId = movieId;
+  }
 
-    public void setQuantityAvailable(Long quantityAvailable) {
-        this.quantityAvailable = quantityAvailable;
-    }
+  public Long getQuantityAvailable() {
+    return quantityAvailable;
+  }
 
-    public Boolean getSellable() {
-        return sellable;
-    }
+  public void setQuantityAvailable(Long quantityAvailable) {
+    this.quantityAvailable = quantityAvailable;
+  }
 
-    public void setSellable(Boolean sellable) {
-        this.sellable = sellable;
-    }
+  public Boolean getSellable() {
+    return sellable;
+  }
 
-    public Double getCurrentPrice() {
-        return currentPrice;
-    }
+  public void setSellable(Boolean sellable) {
+    this.sellable = sellable;
+  }
 
-    public void setCurrentPrice(Double currentPrice) {
-        this.currentPrice = currentPrice;
-    }
+  public Double getCurrentPrice() {
+    return currentPrice;
+  }
+
+  public void setCurrentPrice(Double currentPrice) {
+    this.currentPrice = currentPrice;
+  }
 }

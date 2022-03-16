@@ -6,110 +6,110 @@ import javax.persistence.*;
 @Table(name = "TBL_MOVIES")
 public class Movie {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String title;
-    private String genre;
-    private String director;
-    private String actors;
-    private String Year;
-    // Runtime is in minutes
-    private Long runtime;
-    private Double rating;
-    private Long votes;
-    // Revenue is in Millions
-    private Double revenue;
-    private Long metascore;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
 
-    public Movie() {
-    }
+  private String title;
+  private String genre;
+  private String director;
+  private String actors;
+  private String Year;
+  // Runtime is in minutes
+  private Long runtime;
+  private Double rating;
+  private Long votes;
+  // Revenue is in Millions
+  private Double revenue;
+  private Long metascore;
 
-    public Long getId() {
-        return id;
-    }
+  public Movie() {}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public String getTitle() {
-        return title;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public String getGenre() {
-        return genre;
-    }
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
+  public String getGenre() {
+    return genre;
+  }
 
-    public String getDirector() {
-        return director;
-    }
+  public void setGenre(String genre) {
+    this.genre = genre;
+  }
 
-    public void setDirector(String director) {
-        this.director = director;
-    }
+  public String getDirector() {
+    return director;
+  }
 
-    public String getActors() {
-        return actors;
-    }
+  public void setDirector(String director) {
+    this.director = director;
+  }
 
-    public void setActors(String actors) {
-        this.actors = actors;
-    }
+  public String getActors() {
+    return actors;
+  }
 
-    public String getYear() {
-        return Year;
-    }
+  public void setActors(String actors) {
+    this.actors = actors;
+  }
 
-    public void setYear(String year) {
-        Year = year;
-    }
+  public String getYear() {
+    return Year;
+  }
 
-    public Long getRuntime() {
-        return runtime;
-    }
+  public void setYear(String year) {
+    Year = year;
+  }
 
-    public void setRuntime(Long runtime) {
-        this.runtime = runtime;
-    }
+  public Long getRuntime() {
+    return runtime;
+  }
 
-    public Double getRating() {
-        return rating;
-    }
+  public void setRuntime(Long runtime) {
+    this.runtime = runtime;
+  }
 
-    public void setRating(Double rating) {
-        this.rating = rating;
-    }
+  public Double getRating() {
+    return rating;
+  }
 
-    public Long getVotes() {
-        return votes;
-    }
+  public void setRating(Double rating) {
+    this.rating = rating;
+  }
 
-    public void setVotes(Long votes) {
-        this.votes = votes;
-    }
+  public Long getVotes() {
+    return votes;
+  }
 
-    public Double getRevenue() {
-        return revenue;
-    }
+  public void setVotes(Long votes) {
+    this.votes = votes;
+  }
 
-    public void setRevenue(Double revenue) {
-        this.revenue = revenue;
-    }
+  public Double getRevenue() {
+    return revenue;
+  }
 
-    public Long getMetascore() {
-        return metascore;
-    }
+  public void setRevenue(Double revenue) {
+    this.revenue = revenue;
+  }
 
-    public void setMetascore(Long metascore) {
-        this.metascore = metascore;
-    }
+  public Long getMetascore() {
+    return metascore;
+  }
+
+  public void setMetascore(Long metascore) {
+    this.metascore = metascore;
+  }
 }

@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class MetadataLoadBatchProcessor implements ItemProcessor<Movie, Movie> {
 
-    @Override
-    public Movie process(Movie movie) throws Exception {
-        return movie;
-    }
+  @Override
+  public Movie process(Movie movie) throws Exception {
+    return movie;
+  }
 }
