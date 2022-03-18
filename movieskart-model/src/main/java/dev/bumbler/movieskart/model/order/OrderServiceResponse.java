@@ -5,24 +5,24 @@ import org.springframework.http.HttpStatus;
 
 public class OrderServiceResponse {
 
-  private List<Order> order;
+  private List<Order> orderList;
   private HttpStatus httpStatus;
   private String message;
 
   public OrderServiceResponse() {}
 
   public OrderServiceResponse(List<Order> order, HttpStatus httpStatus, String message) {
-    this.order = order;
+    this.orderList = order;
     this.httpStatus = httpStatus;
     this.message = message;
   }
 
-  public List<Order> getOrder() {
-    return order;
+  public List<Order> getOrderList() {
+    return orderList;
   }
 
-  public void setOrder(List<Order> order) {
-    this.order = order;
+  public void setOrderList(List<Order> orderList) {
+    this.orderList = orderList;
   }
 
   public HttpStatus getHttpStatus() {

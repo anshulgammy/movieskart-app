@@ -48,7 +48,7 @@ public class OrderServiceController {
   public ResponseEntity<OrderServiceResponse> handleOrderServiceException(Exception ex) {
     final OrderServiceResponse orderServiceResponse = new OrderServiceResponse();
     orderServiceResponse.setMessage(ex.getMessage());
-    orderServiceResponse.setOrder(null);
+    orderServiceResponse.setOrderList(null);
     orderServiceResponse.setHttpStatus(HttpStatus.BAD_REQUEST);
     return ResponseEntity.badRequest().body(orderServiceResponse);
   }
@@ -57,7 +57,7 @@ public class OrderServiceController {
   public ResponseEntity<OrderServiceResponse> handleOrderProcessingException(Exception ex) {
     final OrderServiceResponse orderServiceResponse = new OrderServiceResponse();
     orderServiceResponse.setMessage(ex.getMessage());
-    orderServiceResponse.setOrder(null);
+    orderServiceResponse.setOrderList(null);
     orderServiceResponse.setHttpStatus(HttpStatus.INTERNAL_SERVER_ERROR);
     return ResponseEntity.badRequest().body(orderServiceResponse);
   }

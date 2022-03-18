@@ -23,8 +23,6 @@ public class Movie {
   private Double revenue;
   private Long metascore;
 
-  public Movie() {}
-
   public Long getId() {
     return id;
   }

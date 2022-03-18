@@ -1,5 +1,7 @@
 package dev.bumbler.movieskart.metadata.controller;
 
+import static java.util.Objects.requireNonNull;
+
 import dev.bumbler.movieskart.metadata.exceptions.MetadataServiceException;
 import dev.bumbler.movieskart.metadata.service.MetadataService;
 import dev.bumbler.movieskart.model.metadata.MetadataServiceResponse;
@@ -17,7 +19,8 @@ public class MetadataServiceController {
 
   @Autowired
   public MetadataServiceController(MetadataService metadataService) {
-    this.metadataService = metadataService;
+    this.metadataService =
+        requireNonNull(metadataService, "metadataService is required, but its missing");
   }
 
   @GetMapping("/movie/id/{movieId}")

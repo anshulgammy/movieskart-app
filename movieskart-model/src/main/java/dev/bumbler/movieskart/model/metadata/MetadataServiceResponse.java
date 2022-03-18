@@ -8,13 +8,13 @@ public class MetadataServiceResponse {
   private HttpStatus httpStatus;
   private String message;
 
-  public MetadataServiceResponse() {}
-
   public MetadataServiceResponse(List<Movie> movies, HttpStatus httpStatus, String message) {
     this.movies = movies;
     this.httpStatus = httpStatus;
     this.message = message;
   }
+
+  public MetadataServiceResponse() {}
 
   public List<Movie> getMovies() {
     return movies;

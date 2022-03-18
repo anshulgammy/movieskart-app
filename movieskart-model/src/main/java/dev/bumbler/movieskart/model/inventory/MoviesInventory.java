@@ -15,8 +15,6 @@ public class MoviesInventory {
   private Boolean sellable;
   private Double currentPrice;
 
-  public MoviesInventory() {}
-
   public Long getId() {
     return id;
   }

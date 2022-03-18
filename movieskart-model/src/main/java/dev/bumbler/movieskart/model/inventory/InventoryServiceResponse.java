@@ -7,14 +7,14 @@ public class InventoryServiceResponse {
   private HttpStatus httpStatus;
   private String message;
 
-  public InventoryServiceResponse() {}
-
   public InventoryServiceResponse(
       MoviesInventory inventory, HttpStatus httpStatus, String message) {
     this.inventory = inventory;
     this.httpStatus = httpStatus;
     this.message = message;
   }
+
+  public InventoryServiceResponse() {}
 
   public MoviesInventory getInventory() {
     return inventory;
