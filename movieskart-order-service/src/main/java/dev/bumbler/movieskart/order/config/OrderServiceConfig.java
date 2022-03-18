@@ -1,5 +1,6 @@
 package dev.bumbler.movieskart.order.config;
 
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -8,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 public class OrderServiceConfig {
 
   @Bean
+  @LoadBalanced
   public RestTemplate orderServiceRestTemplate() {
     return new RestTemplate();
   }

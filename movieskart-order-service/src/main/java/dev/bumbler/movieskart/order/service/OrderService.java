@@ -19,6 +19,7 @@ import java.util.Objects;
 import java.util.Optional;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
@@ -30,6 +31,12 @@ public class OrderService {
   private OrderRepository orderRepository;
   private RestTemplate restTemplate;
 
+  @Value("${movieskart.inventory.getbymovieid}")
+  private String inventoryByMovieIdURL;
+
+  @Value("${movieskart.inventory.postinventory}")
+  private String postInventoryURL;
+
   @Autowired
   public OrderService(OrderRepository orderRepository, RestTemplate restTemplate) {
     this.orderRepository =
@@ -39,23 +46,30 @@ public class OrderService {
 
   public OrderServiceResponse placeOrder(OrderServiceRequest orderServiceRequest)
       throws OrderServiceException, OrderProcessingException, RestClientException {
-    InventoryServiceResponse inventoryServiceResponse =
-        restTemplate.getForObject(
-            "provide getInventory url " + "here", InventoryServiceResponse.class);
-
-    Boolean orderValidationStatus = validateOrder(inventoryServiceResponse, orderServiceRequest);
-    if (!orderValidationStatus) {
+    Boolean orderServiceRequestValidation = validateOrderServiceRequest(orderServiceRequest);
+    if (!orderServiceRequestValidation) {
       throw new OrderServiceException("Unable to process order");
     }
 
-    Boolean processInventoryStatus =
+    InventoryServiceResponse inventoryServiceResponse =
+        restTemplate.getForObject(
+            inventoryByMovieIdURL + orderServiceRequest.getMovieId(),
+            InventoryServiceResponse.class);
+
+    Boolean orderValidationStatus = validateOrder(inventoryServiceResponse, orderServiceRequest);
+    if (!orderValidationStatus) {
+      throw new OrderServiceException("Inventory and Order mismatch. Unable to process order");
+    }
+
+    InventoryServiceResponse processedInventoryServiceResponse =
         processInventory(inventoryServiceResponse, orderServiceRequest);
-    if (processInventoryStatus) {
-      throw new OrderServiceException("Unable to process order");
+    if (Objects.isNull(processedInventoryServiceResponse)) {
+      throw new OrderServiceException("Unable to update Inventory");
     }
 
     Order processedOrder = processOrder(inventoryServiceResponse, orderServiceRequest);
     if (Objects.isNull(processedOrder)) {
+      // rollbackInventory(processedInventoryServiceResponse, orderServiceRequest);
       throw new OrderServiceException("Unable to process order");
     }
 
@@ -108,7 +122,7 @@ public class OrderService {
     return true;
   }
 
-  private Boolean processInventory(
+  private InventoryServiceResponse processInventory(
       InventoryServiceResponse inventoryServiceResponse, OrderServiceRequest orderServiceRequest)
       throws OrderProcessingException {
     MoviesInventory moviesInventory = inventoryServiceResponse.getInventory();
@@ -124,11 +138,11 @@ public class OrderService {
 
     InventoryServiceResponse postInventoryResponse =
         restTemplate.postForObject(
-            "url for postInventory", moviesInventory, InventoryServiceResponse.class);
+            postInventoryURL, moviesInventory, InventoryServiceResponse.class);
 
     if (Objects.nonNull(postInventoryResponse)
         && postInventoryResponse.getHttpStatus() == HttpStatus.OK) {
-      return true;
+      return postInventoryResponse;
     } else {
       throw new OrderProcessingException("Unable to update inventory. Order processing failed.");
     }
@@ -144,5 +158,15 @@ public class OrderService {
     order.setPurchaseCost(inventoryServiceResponse.getInventory().getCurrentPrice());
     order.setPurchaseDateTime(LocalDateTime.now());
     return orderRepository.save(order);
+  }
+
+  private Boolean validateOrderServiceRequest(OrderServiceRequest orderServiceRequest) {
+    if (Objects.isNull(orderServiceRequest.getQuantity())
+        || Objects.isNull(orderServiceRequest.getCustomerId())
+        || Objects.isNull(orderServiceRequest.getInventoryId())
+        || Objects.isNull(orderServiceRequest.getMovieId())) {
+      return false;
+    }
+    return true;
   }
 }
