@@ -8,7 +8,7 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 @EnableEurekaServer
 public class MoviesKartDiscoveryServiceApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(MoviesKartDiscoveryServiceApplication.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(MoviesKartDiscoveryServiceApplication.class, args);
+  }
 }
