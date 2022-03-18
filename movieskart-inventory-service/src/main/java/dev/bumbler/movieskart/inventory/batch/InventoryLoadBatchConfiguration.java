@@ -1,6 +1,6 @@
 package dev.bumbler.movieskart.inventory.batch;
 
-import dev.bumbler.movieskart.model.inventory.MoviesInventory;
+import dev.bumbler.movieskart.model.inventory.MovieInventory;
 import javax.persistence.EntityManagerFactory;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -29,18 +29,18 @@ public class InventoryLoadBatchConfiguration {
   public Job inventoryDataLoadBatchJob(
       JobBuilderFactory jobBuilderFactory,
       StepBuilderFactory stepBuilderFactory,
-      ItemReader<MoviesInventory> itemReader,
+      ItemReader<MovieInventory> itemReader,
       // ItemProcessor<T, U> T refers to the Raw Type as present while reading from the source. U
       // refers to the
       // mapped class into which read data will be initialized.
-      ItemProcessor<MoviesInventory, MoviesInventory> itemProcessor,
-      ItemWriter<MoviesInventory> itemWriter,
+      ItemProcessor<MovieInventory, MovieInventory> itemProcessor,
+      ItemWriter<MovieInventory> itemWriter,
       InventoryLoadBatchNotificationListener moviesDataLoadBatchNotificationListener) {
     // creating spring batch job step below.
     final Step inventoryDataLoadStep =
         stepBuilderFactory
             .get("inventory-data-load-step")
-            .<MoviesInventory, MoviesInventory>chunk(10)
+            .<MovieInventory, MovieInventory>chunk(10)
             .reader(itemReader)
             .processor(itemProcessor)
             .writer(itemWriter)
@@ -59,8 +59,8 @@ public class InventoryLoadBatchConfiguration {
   }
 
   @Bean
-  public ItemReader<MoviesInventory> createFileItemReader() {
-    return new FlatFileItemReaderBuilder<MoviesInventory>()
+  public ItemReader<MovieInventory> createFileItemReader() {
+    return new FlatFileItemReaderBuilder<MovieInventory>()
         .name("inventory-data-reader")
         .resource(new ClassPathResource("inventory-data\\inventory.csv"))
         .strict(false)
@@ -68,17 +68,17 @@ public class InventoryLoadBatchConfiguration {
         .delimited()
         .names(COLUMN_NAMES)
         .fieldSetMapper(
-            new BeanWrapperFieldSetMapper<MoviesInventory>() {
+            new BeanWrapperFieldSetMapper<MovieInventory>() {
               {
-                setTargetType(MoviesInventory.class);
+                setTargetType(MovieInventory.class);
               }
             })
         .build();
   }
 
   @Bean
-  public ItemWriter<MoviesInventory> createItemWriter(EntityManagerFactory entityManagerFactory) {
-    return new JpaItemWriterBuilder<MoviesInventory>()
+  public ItemWriter<MovieInventory> createItemWriter(EntityManagerFactory entityManagerFactory) {
+    return new JpaItemWriterBuilder<MovieInventory>()
         .entityManagerFactory(entityManagerFactory)
         .build();
   }

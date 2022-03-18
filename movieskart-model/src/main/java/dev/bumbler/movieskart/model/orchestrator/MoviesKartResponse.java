@@ -1,17 +1,14 @@
 package dev.bumbler.movieskart.model.orchestrator;
 
-import dev.bumbler.movieskart.model.inventory.MoviesInventory;
-import dev.bumbler.movieskart.model.metadata.Movie;
 import dev.bumbler.movieskart.model.order.Order;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 
-public class OutgoingResponse {
+public class MoviesKartResponse {
 
   private Long customerId;
   private List<Order> orderList;
-  private List<Movie> movieList;
-  private List<MoviesInventory> inventoryList;
+  private List<MoviesKartMovies> moviesKartMoviesList;
   private HttpStatus httpStatus;
   private String message;
 
@@ -31,22 +28,6 @@ public class OutgoingResponse {
     this.orderList = orderList;
   }
 
-  public List<Movie> getMovieList() {
-    return movieList;
-  }
-
-  public void setMovieList(List<Movie> movieList) {
-    this.movieList = movieList;
-  }
-
-  public List<MoviesInventory> getInventoryList() {
-    return inventoryList;
-  }
-
-  public void setInventoryList(List<MoviesInventory> inventoryList) {
-    this.inventoryList = inventoryList;
-  }
-
   public HttpStatus getHttpStatus() {
     return httpStatus;
   }
@@ -61,5 +42,13 @@ public class OutgoingResponse {
 
   public void setMessage(String message) {
     this.message = message;
+  }
+
+  public List<MoviesKartMovies> getMoviesKartMoviesList() {
+    return moviesKartMoviesList;
+  }
+
+  public void setMoviesKartMoviesList(List<MoviesKartMovies> moviesKartMoviesList) {
+    this.moviesKartMoviesList = moviesKartMoviesList;
   }
 }

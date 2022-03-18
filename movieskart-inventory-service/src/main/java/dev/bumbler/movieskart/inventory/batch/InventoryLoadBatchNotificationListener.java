@@ -1,7 +1,7 @@
 package dev.bumbler.movieskart.inventory.batch;
 
 import dev.bumbler.movieskart.inventory.repo.InventoryRepository;
-import dev.bumbler.movieskart.model.inventory.MoviesInventory;
+import dev.bumbler.movieskart.model.inventory.MovieInventory;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +28,7 @@ public class InventoryLoadBatchNotificationListener extends JobExecutionListener
   public void afterJob(JobExecution jobExecution) {
     if (jobExecution.getStatus() == BatchStatus.COMPLETED) {
       LOGGER.info("BatchStatus.COMPLETED");
-      final Optional<MoviesInventory> inventoryLastRow = inventoryRepository.findById(100L);
+      final Optional<MovieInventory> inventoryLastRow = inventoryRepository.findById(100L);
       if (inventoryLastRow.isPresent()) {
         LOGGER.info("Last Data Row Ingested is: {}", inventoryLastRow.get());
       }

@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import com.google.common.base.Preconditions;
 import dev.bumbler.movieskart.model.inventory.InventoryServiceResponse;
-import dev.bumbler.movieskart.model.inventory.MoviesInventory;
+import dev.bumbler.movieskart.model.inventory.MovieInventory;
 import dev.bumbler.movieskart.model.order.Order;
 import dev.bumbler.movieskart.model.order.OrderServiceRequest;
 import dev.bumbler.movieskart.model.order.OrderServiceResponse;
@@ -110,7 +110,7 @@ public class OrderService {
       return false;
     }
 
-    MoviesInventory moviesInventory = inventoryServiceResponse.getInventory();
+    MovieInventory moviesInventory = inventoryServiceResponse.getInventory();
     if (!moviesInventory.getSellable()) {
       throw new OrderProcessingException("This item is not sellable right now. Unable to process.");
     }
@@ -125,7 +125,7 @@ public class OrderService {
   private InventoryServiceResponse processInventory(
       InventoryServiceResponse inventoryServiceResponse, OrderServiceRequest orderServiceRequest)
       throws OrderProcessingException {
-    MoviesInventory moviesInventory = inventoryServiceResponse.getInventory();
+    MovieInventory moviesInventory = inventoryServiceResponse.getInventory();
 
     Long newQuantityAvailable =
         moviesInventory.getQuantityAvailable() - orderServiceRequest.getQuantity();

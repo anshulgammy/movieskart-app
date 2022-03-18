@@ -3,7 +3,7 @@ package dev.bumbler.movieskart.inventory.controller;
 import dev.bumbler.movieskart.inventory.exceptions.InventoryServiceException;
 import dev.bumbler.movieskart.inventory.service.InventoryService;
 import dev.bumbler.movieskart.model.inventory.InventoryServiceResponse;
-import dev.bumbler.movieskart.model.inventory.MoviesInventory;
+import dev.bumbler.movieskart.model.inventory.MovieInventory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +30,7 @@ public class InventoryServiceController {
 
   @PostMapping("/inventory")
   public ResponseEntity<InventoryServiceResponse> postInventory(
-      @RequestBody MoviesInventory inventory) throws InventoryServiceException {
+      @RequestBody MovieInventory inventory) throws InventoryServiceException {
     final InventoryServiceResponse inventoryServiceResponse =
         inventoryService.postInventory(inventory);
     return ResponseEntity.ok(inventoryServiceResponse);

@@ -5,7 +5,7 @@ import dev.bumbler.movieskart.inventory.exceptions.InventoryServiceException;
 import dev.bumbler.movieskart.inventory.repo.InventoryRepository;
 import dev.bumbler.movieskart.inventory.util.Constants;
 import dev.bumbler.movieskart.model.inventory.InventoryServiceResponse;
-import dev.bumbler.movieskart.model.inventory.MoviesInventory;
+import dev.bumbler.movieskart.model.inventory.MovieInventory;
 import java.util.Optional;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class InventoryService {
   public InventoryServiceResponse getInventoryByMovieId(String movieId)
       throws InventoryServiceException {
     Preconditions.checkArgument(StringUtils.isNotEmpty(movieId));
-    Optional<MoviesInventory> movieInventory =
+    Optional<MovieInventory> movieInventory =
         inventoryRepository.findByMovieId(Long.valueOf(movieId));
     if (movieInventory.isPresent()) {
       return prepareInventoryServiceResponse(movieInventory.get());
@@ -34,12 +34,12 @@ public class InventoryService {
     }
   }
 
-  private InventoryServiceResponse prepareInventoryServiceResponse(MoviesInventory inventory) {
+  private InventoryServiceResponse prepareInventoryServiceResponse(MovieInventory inventory) {
     return new InventoryServiceResponse(
         inventory, HttpStatus.OK, Constants.INVENTORY_SERVICE_SUCCESS_RESPONSE_MESSAGE);
   }
 
-  public InventoryServiceResponse postInventory(MoviesInventory inventory)
+  public InventoryServiceResponse postInventory(MovieInventory inventory)
       throws InventoryServiceException {
     try {
       return prepareInventoryServiceResponse(inventoryRepository.save(inventory));

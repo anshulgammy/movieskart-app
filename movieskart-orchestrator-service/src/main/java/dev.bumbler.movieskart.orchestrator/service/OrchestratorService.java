@@ -2,16 +2,18 @@ package dev.bumbler.movieskart.orchestrator.service;
 
 import static java.util.Objects.requireNonNull;
 
-import dev.bumbler.movieskart.model.inventory.MoviesInventory;
+import dev.bumbler.movieskart.model.inventory.InventoryServiceResponse;
 import dev.bumbler.movieskart.model.metadata.MetadataServiceResponse;
-import dev.bumbler.movieskart.model.metadata.Movie;
-import dev.bumbler.movieskart.model.orchestrator.IncomingRequest;
-import dev.bumbler.movieskart.model.orchestrator.OutgoingResponse;
+import dev.bumbler.movieskart.model.orchestrator.MoviesKartMovies;
+import dev.bumbler.movieskart.model.orchestrator.MoviesKartRequest;
+import dev.bumbler.movieskart.model.orchestrator.MoviesKartResponse;
 import dev.bumbler.movieskart.model.order.Order;
+import dev.bumbler.movieskart.model.order.OrderServiceRequest;
 import dev.bumbler.movieskart.model.order.OrderServiceResponse;
+import dev.bumbler.movieskart.orchestrator.util.Constants;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -21,17 +23,20 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class OrchestratorService {
 
-  @Value("{$movieskart.metadata.getbymovieid}")
-  private String getByMovieIdURL;
+  @Value("{$movieskart.order.getbycustomerid}")
+  private String getOrderByCustomerIdURL; //
 
-  @Value("{$movieskart.metadata.getbycustomerid}")
-  private String getByCustomerIdURL;
+  @Value("${movieskart.metadata.getbytitle}")
+  private String getMetadataByTitleURL;
 
-  @Value("${movieskart.metadata.getmoviebytitle}")
-  private String getGetByTitleURL;
+  @Value("${movieskart.metadata.getbyid}")
+  private String getMetadataByIdURL;
 
   @Value("${movieskart.order.placeorder}")
   private String placeOrderURL;
+
+  @Value("${movieskart.inventory.getbymovieid}")
+  private String getInventoryByMovieId;
 
   private RestTemplate restTemplate;
 
@@ -40,66 +45,93 @@ public class OrchestratorService {
     this.restTemplate = requireNonNull(restTemplate, "restTemplate is required, but its missing");
   }
 
-  public OutgoingResponse getMovies(IncomingRequest incomingRequest) {
+  public MoviesKartResponse getMoviesByName(MoviesKartRequest moviesKartRequest) {
+    List<MoviesKartMovies> moviesKartMoviesList = new ArrayList<>();
+
     MetadataServiceResponse metadataServiceResponse =
         restTemplate.getForObject(
-            getGetByTitleURL + incomingRequest.getMovieNameKeyWord(),
+            getMetadataByTitleURL + moviesKartRequest.getMovieNameKeyWord(),
             MetadataServiceResponse.class);
-    if (Objects.nonNull(metadataServiceResponse)
-        && Objects.nonNull(metadataServiceResponse.getMovies())) {
-      return prepareOutgoingResponse(
-          incomingRequest.getCustomerId(), null, metadataServiceResponse.getMovies(), null);
-    }
-    return new OutgoingResponse();
+
+    metadataServiceResponse
+        .getMovies()
+        .forEach(
+            movie -> {
+              MoviesKartMovies moviesKartMovie = new MoviesKartMovies();
+              InventoryServiceResponse movieInventory =
+                  restTemplate.getForObject(
+                      getInventoryByMovieId + movie.getId(), InventoryServiceResponse.class);
+              moviesKartMovie.setMovie(movie);
+              moviesKartMovie.setMovieInventory(movieInventory.getInventory());
+              moviesKartMoviesList.add(moviesKartMovie);
+            });
+
+    return prepareMoviesKartResponse(moviesKartRequest.getCustomerId(), null, moviesKartMoviesList);
   }
 
-  /*public OutgoingResponse placeOrder(IncomingRequest incomingRequest) {
-      OrderServiceRequest orderServiceRequest = new OrderServiceRequest();
-      orderServiceRequest.setCustomerId(incomingRequest.getCustomerId());
-      orderServiceRequest.set
-      OrderServiceResponse orderServiceResponse =
-              restTemplate.postForObject(placeOrderURL,
-                      OrderServiceResponse.class);
-      if(Objects.nonNull(orderServiceResponse) && Objects.nonNull(orderServiceResponse.getOrderList())) {
-          return prepareOutgoingResponse(incomingRequest.getCustomerId(), orderServiceResponse.getOrderList(), null
-                  , null);
-      }
-      return new OutgoingResponse();
-  }*/
+  public MoviesKartResponse placeOrder(MoviesKartRequest moviesKartRequest) {
+    InventoryServiceResponse inventoryServiceResponse =
+        restTemplate.getForObject(
+            getInventoryByMovieId + moviesKartRequest.getMovieId(), InventoryServiceResponse.class);
 
-  public OutgoingResponse getAllDetails(Long customerId) {
-    List<Movie> movieList = new ArrayList<>();
-    List<Order> orderList = new ArrayList<>();
+    MetadataServiceResponse metadataServiceResponse =
+        restTemplate.getForObject(getMetadataByIdURL, MetadataServiceResponse.class);
+
+    OrderServiceRequest orderServiceRequest = new OrderServiceRequest();
+    orderServiceRequest.setInventoryId(inventoryServiceResponse.getInventory().getId());
+    orderServiceRequest.setMovieId(moviesKartRequest.getMovieId());
+    orderServiceRequest.setCustomerId(moviesKartRequest.getCustomerId());
+    orderServiceRequest.setQuantity(moviesKartRequest.getOrderQuantity());
+
     OrderServiceResponse orderServiceResponse =
-        restTemplate.getForObject(getByCustomerIdURL + customerId, OrderServiceResponse.class);
-    if (Objects.nonNull(orderServiceResponse)
-        && Objects.nonNull(orderServiceResponse.getOrderList())) {
-      orderServiceResponse
-          .getOrderList()
-          .forEach(
-              order -> {
-                MetadataServiceResponse metadataServiceResponse =
-                    restTemplate.getForObject(
-                        getByMovieIdURL + order.getMovieId(), MetadataServiceResponse.class);
-                movieList.addAll(metadataServiceResponse.getMovies());
-                orderList.add(order);
-              });
-    }
-    return prepareOutgoingResponse(customerId, orderList, movieList, null);
+        restTemplate.postForObject(placeOrderURL, orderServiceRequest, OrderServiceResponse.class);
+
+    MoviesKartMovies moviesKartMovies = new MoviesKartMovies();
+    moviesKartMovies.setMovie(metadataServiceResponse.getMovies().get(0));
+    moviesKartMovies.setMovieInventory(inventoryServiceResponse.getInventory());
+
+    return prepareMoviesKartResponse(
+        moviesKartRequest.getCustomerId(),
+        orderServiceResponse.getOrderList(),
+        Arrays.asList(moviesKartMovies));
   }
 
-  private OutgoingResponse prepareOutgoingResponse(
-      Long customerId,
-      List<Order> orderList,
-      List<Movie> movieList,
-      List<MoviesInventory> inventoryList) {
-    OutgoingResponse outgoingResponse = new OutgoingResponse();
-    outgoingResponse.setOrderList(orderList);
-    outgoingResponse.setCustomerId(customerId);
-    outgoingResponse.setInventoryList(inventoryList);
-    outgoingResponse.setMovieList(movieList);
-    outgoingResponse.setHttpStatus(HttpStatus.OK);
-    outgoingResponse.setMessage("success");
-    return outgoingResponse;
+  public MoviesKartResponse getAllDetailsForCustomer(Long customerId) {
+    List<MoviesKartMovies> moviesKartMoviesList = new ArrayList<>();
+
+    OrderServiceResponse orderServiceResponse =
+        restTemplate.getForObject(getOrderByCustomerIdURL + customerId, OrderServiceResponse.class);
+
+    orderServiceResponse
+        .getOrderList()
+        .forEach(
+            order -> {
+              MoviesKartMovies moviesKartMovie = new MoviesKartMovies();
+              moviesKartMovie.setMovie(
+                  restTemplate
+                      .getForObject(
+                          getMetadataByIdURL + order.getMovieId(), MetadataServiceResponse.class)
+                      .getMovies()
+                      .get(0));
+              moviesKartMovie.setMovieInventory(
+                  restTemplate
+                      .getForObject(getInventoryByMovieId, InventoryServiceResponse.class)
+                      .getInventory());
+              moviesKartMoviesList.add(moviesKartMovie);
+            });
+
+    return prepareMoviesKartResponse(
+        customerId, orderServiceResponse.getOrderList(), moviesKartMoviesList);
+  }
+
+  private MoviesKartResponse prepareMoviesKartResponse(
+      Long customerId, List<Order> orderList, List<MoviesKartMovies> moviesKartMoviesList) {
+    MoviesKartResponse moviesKartResponse = new MoviesKartResponse();
+    moviesKartResponse.setMoviesKartMoviesList(moviesKartMoviesList);
+    moviesKartResponse.setCustomerId(customerId);
+    moviesKartResponse.setMessage(Constants.ORCHESTRATOR_SERVICE_SUCCESS_RESPONSE_MESSAGE);
+    moviesKartResponse.setOrderList(orderList);
+    moviesKartResponse.setHttpStatus(HttpStatus.OK);
+    return moviesKartResponse;
   }
 }

@@ -1,12 +1,13 @@
 package dev.bumbler.movieskart.model.orchestrator;
 
-public class IncomingRequest {
+public class MoviesKartRequest {
 
   private Long customerId;
   private String movieNameKeyWord;
   private Long movieId;
   private Long orderId;
   private Long inventoryId;
+  private Long orderQuantity;
 
   public Long getCustomerId() {
     return customerId;
@@ -46,5 +47,13 @@ public class IncomingRequest {
 
   public void setInventoryId(Long inventoryId) {
     this.inventoryId = inventoryId;
+  }
+
+  public Long getOrderQuantity() {
+    return orderQuantity;
+  }
+
+  public void setOrderQuantity(Long orderQuantity) {
+    this.orderQuantity = orderQuantity;
   }
 }

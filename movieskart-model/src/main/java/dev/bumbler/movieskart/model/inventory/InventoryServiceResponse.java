@@ -3,12 +3,11 @@ package dev.bumbler.movieskart.model.inventory;
 import org.springframework.http.HttpStatus;
 
 public class InventoryServiceResponse {
-  private MoviesInventory inventory;
+  private MovieInventory inventory;
   private HttpStatus httpStatus;
   private String message;
 
-  public InventoryServiceResponse(
-      MoviesInventory inventory, HttpStatus httpStatus, String message) {
+  public InventoryServiceResponse(MovieInventory inventory, HttpStatus httpStatus, String message) {
     this.inventory = inventory;
     this.httpStatus = httpStatus;
     this.message = message;
@@ -16,11 +15,11 @@ public class InventoryServiceResponse {
 
   public InventoryServiceResponse() {}
 
-  public MoviesInventory getInventory() {
+  public MovieInventory getInventory() {
     return inventory;
   }
 
-  public void setInventory(MoviesInventory inventory) {
+  public void setInventory(MovieInventory inventory) {
     this.inventory = inventory;
   }
 
