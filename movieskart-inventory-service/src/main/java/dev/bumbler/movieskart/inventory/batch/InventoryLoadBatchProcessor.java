@@ -9,7 +9,7 @@ public class InventoryLoadBatchProcessor
     implements ItemProcessor<MoviesInventory, MoviesInventory> {
 
   @Override
-  public MoviesInventory process(MoviesInventory movie) throws Exception {
-    return movie;
+  public MoviesInventory process(MoviesInventory moviesInventory) throws Exception {
+    return moviesInventory;
   }
 }

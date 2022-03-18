@@ -21,7 +21,7 @@ public class InventoryServiceController {
   }
 
   @GetMapping("/inventory/movie/id/{movieId}")
-  public ResponseEntity<InventoryServiceResponse> getMovieById(
+  public ResponseEntity<InventoryServiceResponse> getInventoryByMovieId(
       @PathVariable("movieId") String movieId) throws InventoryServiceException {
     final InventoryServiceResponse inventoryServiceResponse =
         inventoryService.getInventoryByMovieId(movieId);
