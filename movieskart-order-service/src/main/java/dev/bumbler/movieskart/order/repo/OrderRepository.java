@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface OrderRepository extends CrudRepository<Order, Long> {
 
-  public List<Order> findByCustomerId(String customerId);
+  public List<Order> findByCustomerId(Long customerId);
 }

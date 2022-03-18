@@ -89,7 +89,7 @@ public class OrderService {
   public OrderServiceResponse getOrdersByCustomerId(String customerId)
       throws OrderServiceException {
     Preconditions.checkArgument(StringUtils.isNotEmpty(customerId));
-    List<Order> orderList = orderRepository.findByCustomerId(customerId);
+    List<Order> orderList = orderRepository.findByCustomerId(Long.valueOf(customerId));
     if (Objects.nonNull(orderList) && orderList.size() > 0) {
       return prepareOrderServiceResponse(orderList);
     } else {

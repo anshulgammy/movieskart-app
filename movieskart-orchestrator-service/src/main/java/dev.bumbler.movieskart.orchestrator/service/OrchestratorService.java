@@ -23,7 +23,7 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class OrchestratorService {
 
-  @Value("{$movieskart.order.getbycustomerid}")
+  @Value("${movieskart.order.getbycustomerid}")
   private String getOrderByCustomerIdURL; //
 
   @Value("${movieskart.metadata.getbytitle}")
@@ -75,7 +75,8 @@ public class OrchestratorService {
             getInventoryByMovieId + moviesKartRequest.getMovieId(), InventoryServiceResponse.class);
 
     MetadataServiceResponse metadataServiceResponse =
-        restTemplate.getForObject(getMetadataByIdURL, MetadataServiceResponse.class);
+        restTemplate.getForObject(
+            getMetadataByIdURL + moviesKartRequest.getMovieId(), MetadataServiceResponse.class);
 
     OrderServiceRequest orderServiceRequest = new OrderServiceRequest();
     orderServiceRequest.setInventoryId(inventoryServiceResponse.getInventory().getId());

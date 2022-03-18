@@ -25,14 +25,14 @@ public class OrchestratorController {
     return ResponseEntity.ok(outgoingResponse);
   }
 
-  @PostMapping
+  @PostMapping("/movies/search")
   public ResponseEntity<MoviesKartResponse> getMoviesByName(
       @RequestBody MoviesKartRequest moviesKartRequest) {
     MoviesKartResponse outgoingResponse = orchestratorService.getMoviesByName(moviesKartRequest);
     return ResponseEntity.ok(outgoingResponse);
   }
 
-  @PostMapping
+  @PostMapping("/movies/order")
   public ResponseEntity<MoviesKartResponse> placeOrder(
       @RequestBody MoviesKartRequest moviesKartRequest) {
     MoviesKartResponse outgoingResponse = orchestratorService.placeOrder(moviesKartRequest);

@@ -1,4 +1,4 @@
-package dev.bumbler.movieskart.order;
+package dev.bumbler.movieskart.orchestrator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
