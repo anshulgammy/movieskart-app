@@ -8,7 +8,7 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 @EnableConfigServer
 public class MoviesKartConfigServiceApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(MoviesKartConfigServiceApplication.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(MoviesKartConfigServiceApplication.class, args);
+  }
 }
