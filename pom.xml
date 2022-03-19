@@ -23,7 +23,7 @@
     <module>movieskart-inventory-service</module>
     <module>movieskart-order-service</module>
     <module>movieskart-orchestrator-service</module>
-    <!--<module>movieskart-service-config</module>-->
+    <module>movieskart-config-service</module>
     <module>movieskart-discovery-service</module>
   </modules>
 
