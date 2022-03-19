@@ -116,7 +116,9 @@ public class OrchestratorService {
                       .get(0));
               moviesKartMovie.setMovieInventory(
                   restTemplate
-                      .getForObject(getInventoryByMovieId, InventoryServiceResponse.class)
+                      .getForObject(
+                          getInventoryByMovieId + order.getMovieId(),
+                          InventoryServiceResponse.class)
                       .getInventory());
               moviesKartMoviesList.add(moviesKartMovie);
             });
