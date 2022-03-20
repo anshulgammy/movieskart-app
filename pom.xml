@@ -25,6 +25,7 @@
     <module>movieskart-orchestrator-service</module>
     <module>movieskart-config-service</module>
     <module>movieskart-discovery-service</module>
+    <module>movieskart-gateway-service</module>
   </modules>
 
   <properties>
