@@ -20,19 +20,19 @@ public class MoviesKartGatewayConfig {
                         f ->
                             f.rewritePath(
                                 "/details/customer/(?<RID>.*)", "/v1/api/details/customer/${RID}"))
-                    .uri("http://localhost:8704/"))
+                    .uri("lb://movieskart-orchestrator-service/"))
         .route(
             "orchestrator_route_2",
             r ->
                 r.path("/movies/search")
                     .filters(f -> f.rewritePath("/movies/search", "/v1/api/movies/search"))
-                    .uri("http://localhost:8704/"))
+                    .uri("lb://movieskart-orchestrator-service/"))
         .route(
             "orchestrator_route_3",
             r ->
                 r.path("/movies/order")
                     .filters(f -> f.rewritePath("/movies/order", "/v1/api/movies/order"))
-                    .uri("http://localhost:8704/"))
+                    .uri("lb://movieskart-orchestrator-service/"))
         .build();
   }
 }
