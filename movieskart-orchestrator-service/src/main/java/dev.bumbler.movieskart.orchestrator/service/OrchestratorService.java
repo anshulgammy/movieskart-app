@@ -11,9 +11,12 @@ import dev.bumbler.movieskart.model.order.Order;
 import dev.bumbler.movieskart.model.order.OrderServiceRequest;
 import dev.bumbler.movieskart.model.order.OrderServiceResponse;
 import dev.bumbler.movieskart.orchestrator.util.Constants;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -45,6 +48,8 @@ public class OrchestratorService {
     this.restTemplate = requireNonNull(restTemplate, "restTemplate is required, but its missing");
   }
 
+  @CircuitBreaker(name = Constants.CIRCUIT_BREAKER_NAME, fallbackMethod = Constants.FALLBACK_METHOD)
+  @Retry(name = Constants.RETRY_NAME)
   public MoviesKartResponse getMoviesByName(MoviesKartRequest moviesKartRequest) {
     List<MoviesKartMovies> moviesKartMoviesList = new ArrayList<>();
 
@@ -69,6 +74,8 @@ public class OrchestratorService {
     return prepareMoviesKartResponse(moviesKartRequest.getCustomerId(), null, moviesKartMoviesList);
   }
 
+  @CircuitBreaker(name = Constants.CIRCUIT_BREAKER_NAME, fallbackMethod = Constants.FALLBACK_METHOD)
+  @Retry(name = Constants.RETRY_NAME)
   public MoviesKartResponse placeOrder(MoviesKartRequest moviesKartRequest) {
     InventoryServiceResponse inventoryServiceResponse =
         restTemplate.getForObject(
@@ -97,6 +104,8 @@ public class OrchestratorService {
         Arrays.asList(moviesKartMovies));
   }
 
+  @CircuitBreaker(name = Constants.CIRCUIT_BREAKER_NAME, fallbackMethod = Constants.FALLBACK_METHOD)
+  @Retry(name = Constants.RETRY_NAME)
   public MoviesKartResponse getAllDetailsForCustomer(Long customerId) {
     List<MoviesKartMovies> moviesKartMoviesList = new ArrayList<>();
 
@@ -135,6 +144,33 @@ public class OrchestratorService {
     moviesKartResponse.setMessage(Constants.ORCHESTRATOR_SERVICE_SUCCESS_RESPONSE_MESSAGE);
     moviesKartResponse.setOrderList(orderList);
     moviesKartResponse.setHttpStatus(HttpStatus.OK);
+    return moviesKartResponse;
+  }
+
+  private MoviesKartResponse fallbackMoviesKartResponse(
+      MoviesKartRequest moviesKartRequest, Throwable exception) {
+    MoviesKartResponse moviesKartResponse = new MoviesKartResponse();
+    moviesKartResponse.setMoviesKartMoviesList(null);
+    moviesKartResponse.setCustomerId(moviesKartRequest.getCustomerId());
+    moviesKartResponse.setMessage(
+        Constants.ORCHESTRATOR_SERVICE_FALLBACK_RESPONSE
+            + System.lineSeparator()
+            + (Objects.nonNull(exception) ? exception.getMessage() : null));
+    moviesKartResponse.setOrderList(null);
+    moviesKartResponse.setHttpStatus(HttpStatus.SERVICE_UNAVAILABLE);
+    return moviesKartResponse;
+  }
+
+  private MoviesKartResponse fallbackMoviesKartResponse(Long customerId, Throwable exception) {
+    MoviesKartResponse moviesKartResponse = new MoviesKartResponse();
+    moviesKartResponse.setMoviesKartMoviesList(null);
+    moviesKartResponse.setCustomerId(customerId);
+    moviesKartResponse.setMessage(
+        Constants.ORCHESTRATOR_SERVICE_FALLBACK_RESPONSE
+            + System.lineSeparator()
+            + (Objects.nonNull(exception) ? exception.getMessage() : null));
+    moviesKartResponse.setOrderList(null);
+    moviesKartResponse.setHttpStatus(HttpStatus.SERVICE_UNAVAILABLE);
     return moviesKartResponse;
   }
 }
