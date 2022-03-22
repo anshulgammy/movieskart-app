@@ -7,4 +7,4 @@ EXPOSE 8706
 ADD target/movieskart-config-service-1.0-SNAPSHOT.jar movieskart-config-service-1.0-SNAPSHOT.jar
 
 # Run the jar file
-ENTRYPOINT ["java","-jar","movieskart-config-1.0-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","movieskart-config-service-1.0-SNAPSHOT.jar"]
