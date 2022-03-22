@@ -23,10 +23,14 @@ public class MoviesKartResilience4jConfig {
 
   private static final String R4J_CB_NAME =
       "resilience4j.circuitbreaker.name:" + Constants.CIRCUIT_BREAKER_NAME;
-  private static final String R4J_CB_WAIT_DURATION_IN_OPEN_STATE = "resilience4j.circuitbreaker.waitDurationInOpenState:3";
-  private static final String R4J_CB_SLIDING_WINDOW_SIZE = "resilience4j.circuitbreaker.slidingWindowSize:2";
-  private static final String R4J_CB_FAILURE_RATE_THRESHOLD = "resilience4j.circuitbreaker.failureRateThreshold:30";
-  private static final String R4J_CB_FAILURE_PERMITTED_NUM_OF_CALLS_IN_HALFOPEN_STATE = "resilience4j.circuitbreaker.permittedNumberOfCallsInHalfOpenState:3";
+  private static final String R4J_CB_WAIT_DURATION_IN_OPEN_STATE =
+      "resilience4j.circuitbreaker.waitDurationInOpenState:3";
+  private static final String R4J_CB_SLIDING_WINDOW_SIZE =
+      "resilience4j.circuitbreaker.slidingWindowSize:2";
+  private static final String R4J_CB_FAILURE_RATE_THRESHOLD =
+      "resilience4j.circuitbreaker.failureRateThreshold:30";
+  private static final String R4J_CB_FAILURE_PERMITTED_NUM_OF_CALLS_IN_HALFOPEN_STATE =
+      "resilience4j.circuitbreaker.permittedNumberOfCallsInHalfOpenState:3";
 
   @Bean
   public Retry resilientServiceRetry(
