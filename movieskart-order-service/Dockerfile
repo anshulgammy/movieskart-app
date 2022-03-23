@@ -7,4 +7,4 @@ EXPOSE 8703
 ADD target/movieskart-order-service-1.0-SNAPSHOT.jar movieskart-order-service-1.0-SNAPSHOT.jar
 
 # Run the jar file
-ENTRYPOINT ["java","-jar","movieskart-orchestrator-order-1.0-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","movieskart-order-service-1.0-SNAPSHOT.jar"]
