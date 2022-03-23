@@ -21,11 +21,15 @@ You can also go to each microservice folder and build them separately.
 Need to update the Eureka Server IP address before you run microservices, else they wont be able to find where the eureka server is.
 
 
-Run docker images(in the below order preferably):
-movieskart-discovery-service       docker run -d -p 8705:8705 anshulgammy/movieskart-discovery-service:1.0-SNAPSHOT
-movieskart-config-service          docker run -d -p 8706:8706 anshulgammy/movieskart-config-service:1.0-SNAPSHOT
-movieskart-gateway-service         docker run -d -p 8080:8080 anshulgammy/movieskart-gateway-service:1.0-SNAPSHOT
-movieskart-metadata-service        docker run -d -p 8701:8701 anshulgammy/movieskart-metadata-service:1.0-SNAPSHOT
-movieskart-inventory-service       docker run -d -p 8702:8702 anshulgammy/movieskart-inventory-service:1.0-SNAPSHOT
-movieskart-order-service           docker run -d -p 8703:8703 anshulgammy/movieskart-order-service:1.0-SNAPSHOT
-movieskart-orchestrator-service    docker run -d -p 8704:8704 anshulgammy/movieskart-orchestrator-service:1.0-SNAPSHOT
+Service names and their docker images details:
+movieskart-discovery-service       # docker run -d -p 8705:8705 anshulgammy/movieskart-discovery-service:1.0-SNAPSHOT
+movieskart-config-service          # docker run -d -p 8706:8706 anshulgammy/movieskart-config-service:1.0-SNAPSHOT
+movieskart-gateway-service         # docker run -d -p 8080:8080 anshulgammy/movieskart-gateway-service:1.0-SNAPSHOT
+movieskart-metadata-service        # docker run -d -p 8701:8701 anshulgammy/movieskart-metadata-service:1.0-SNAPSHOT
+movieskart-inventory-service       # docker run -d -p 8702:8702 anshulgammy/movieskart-inventory-service:1.0-SNAPSHOT
+movieskart-order-service           # docker run -d -p 8703:8703 anshulgammy/movieskart-order-service:1.0-SNAPSHOT
+movieskart-orchestrator-service    # docker run -d -p 8704:8704 anshulgammy/movieskart-orchestrator-service:1.0-SNAPSHOT
+
+Run the services via docker-compose:
+Go to project root directory and run from there. All the necessary configurations are mentioned in the docker-compose.yml file.
+docker-compose up
