@@ -33,3 +33,6 @@ movieskart-orchestrator-service    # docker run -d -p 8704:8704 anshulgammy/movi
 Run the services via docker-compose:
 Go to project root directory and run from there. All the necessary configurations are mentioned in the docker-compose.yml file.
 docker-compose up
+
+movieskart-gateway-service is protected by Basic Authorization(user/user).
+I will upgrade it to JWT. In the time crunch, I had to go with Basic Implementation for Security.
