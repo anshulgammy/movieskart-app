@@ -1,5 +1,5 @@
 # Start with a base image containing Java runtime
-FROM openjdk:11
+FROM openjdk:17
 
 # Marking port 8705 available to the world outside this container
 EXPOSE 8705
